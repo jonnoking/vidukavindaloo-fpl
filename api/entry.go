@@ -3,9 +3,10 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jonnoking/vidukavindaloo-fpl/models"
 	"log"
 	"strings"
+
+	"github.com/jonnoking/vidukavindaloo-fpl/models"
 )
 
 func GetEntryFromCache(teamID int, players *models.Players, teams *models.Teams, playerTypes *models.PlayerTypes) (*models.Entry, error) {
@@ -162,7 +163,7 @@ func (api *API) CreateTransferMap(transfers *models.EntryTransfers) (*models.Ent
 
 	for i, t := range transfers.Transfers {
 		etm.Transfers[fmt.Sprintf("event-%d", t.Event)] = &t
-		log.Println(i)
+		//log.Println(i)
 	}
 
 	return &etm, nil

@@ -2,9 +2,9 @@ package models
 
 import (
 	"encoding/json"
-	"github.com/mitchellh/mapstructure"
 	"io/ioutil"
-	"log"
+
+	"github.com/mitchellh/mapstructure"
 )
 
 // error - circular package reference
@@ -36,7 +36,7 @@ func NewPlayers(players []Player) (*Players, error) {
 	t := new(Players)
 	t.Players = ts
 	t.PlayersByID = tid
-	log.Println(len(t.Players)) //working
+	//log.Println(len(t.Players)) //working
 	return t, nil
 }
 

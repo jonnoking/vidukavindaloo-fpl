@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -81,7 +80,7 @@ func (api *API) refreshCookies() (map[string]FPLCookie, error) {
 	data.Set("app", api.Config.Login.App)
 
 	u, _ := url.ParseRequestURI(loginURL)
-	log.Println("URL: ", data.Encode())
+	//log.Println("URL: ", data.Encode())
 
 	client := &http.Client{
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
@@ -99,7 +98,7 @@ func (api *API) refreshCookies() (map[string]FPLCookie, error) {
 	check(respErr)
 	defer resp.Body.Close()
 
-	log.Println("Number of cookies: ", len(resp.Cookies()))
+	//log.Println("Number of cookies: ", len(resp.Cookies()))
 
 	if resp.StatusCode >= 400 {
 		e := errors.New("FPL login failed with status " + strconv.Itoa(resp.StatusCode))
