@@ -99,7 +99,7 @@ func (api *API) GetEntryTransfers(entryID int) (*models.EntryTransfers, error) {
 
 	api.Config.Files.SaveByteArrayToFile(byteValue, api.Config.Files.GetEntryTransfersFilename(entryID))
 
-	log.Printf("Transfers 1 Length: %d\n", len(entryTransfers.Transfers))
+	//log.Printf("Transfers 1 Length: %d\n", len(entryTransfers.Transfers))
 
 	return &entryTransfers, nil
 }
