@@ -161,7 +161,7 @@ func (api *API) CreateTransferMap(transfers *models.EntryTransfers) (*models.Ent
 
 	log.Printf("Transfers Length: %d\n", len(transfers.Transfers))
 
-	for i, t := range transfers.Transfers {
+	for _, t := range transfers.Transfers {
 		etm.Transfers[fmt.Sprintf("event-%d", t.Event)] = &t
 		//log.Println(i)
 	}
