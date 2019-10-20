@@ -2,7 +2,6 @@ package models
 
 import (
 	"fmt"
-	"log"
 	s "strings"
 )
 
@@ -22,28 +21,41 @@ func (p *Teams) New(teams []Team) {
 }
 
 // GetTeamByName Returns a team details via a team name
-func (p *Teams) GetTeamByName(name string) *Team {
+func (p *Teams) GetTeamByName(name string) (*Team, error) {
 	var ret Team
 
 	for _, team := range p.Teams {
 		if s.ToLower(team.Name) == s.ToLower(name) {
-			return &team
+			return &team, nil
 		}
 	}
-	log.Panicf("No team called %s found", name)
-	return &ret
+	//log.Panicf("No team called %s found", name)
+	return &ret, fmt.Errorf("No team called %s found", name)
+}
+
+// GetTeamByShortName Returns a team details via a team name
+func (p *Teams) GetTeamByShortName(name string) (*Team, error) {
+	var ret Team
+
+	for _, team := range p.Teams {
+		if s.ToLower(team.ShortName) == s.ToLower(name) {
+			return &team, nil
+		}
+	}
+	//log.Panicf("No team called %s found", name)
+	return &ret, fmt.Errorf("No team called %s found", name)
 }
 
 // GetTeamByCode Returns a team details via a team code
-func (p *Teams) GetTeamByCode(code int) (Team, error) {
+func (p *Teams) GetTeamByCode(code int) (*Team, error) {
 	var ret Team
 
 	team, found := p.TeamsByCode[code]
 	if !found {
-		return ret, fmt.Errorf("No team found with code %d", code)
+		return &ret, fmt.Errorf("No team found with code %d", code)
 	}
 
-	return team, nil
+	return &team, nil
 }
 
 // Team represents a Premier League team
