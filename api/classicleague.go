@@ -2,11 +2,9 @@ package api
 
 import (
 	"encoding/json"
+	"log"
 
 	"github.com/jonnoking/vidukavindaloo-fpl/models"
-
-	//	"io/ioutil"
-	"log"
 )
 
 func (api *API) GetClassicLeague(leagueID int) (*models.ClassicLeague, error) {

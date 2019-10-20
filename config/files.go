@@ -106,16 +106,6 @@ func (f *FPLFile) SaveURLtoFile(url string, filename string) error {
 
 	f.SaveBodyToFile(response.Body, filename)
 
-	// byteValue, readErr := ioutil.ReadAll(response.Body)
-	// if readErr != nil {
-	// 	return readErr
-	// }
-
-	// fErr := ioutil.WriteFile(filename, byteValue, 0644)
-	// if fErr != nil {
-	// 	return fErr
-	// }
-
 	defer response.Body.Close()
 
 	return nil

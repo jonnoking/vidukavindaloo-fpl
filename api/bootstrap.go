@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-	// "net/http"
-	// "time"
 )
 
 func (api *API) LoadBootsrapFromCache() ([]byte, error) {
