@@ -31,7 +31,7 @@ func initFPL() *fpl.FPL {
 
 	fplConfig := config.New(getEnv("FPL_USER", ""), getEnv("FPL_PASSWORD", ""), 8, "", "", "")
 	FPL := fpl.New(fplConfig)
-	FPL.LoadBoostrapLive()
+	FPL.LoadBootstrapCache()
 
 	return FPL
 }
