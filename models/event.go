@@ -34,3 +34,33 @@ type EventChipPlays struct {
 	ChipPlayed string `json:"chip_played"`
 	NumPlayed  int    `json:"num_played"`
 }
+
+func (es *Events) GetCurrentEvent() *Event {
+	res := new(Event)
+	for _, e := range es.Events {
+		if e.IsCurrent == true {
+			return &e
+		}
+	}
+	return res
+}
+
+func (es *Events) GetPreviousEvent() *Event {
+	res := new(Event)
+	for _, e := range es.Events {
+		if e.IsPrevious == true {
+			return &e
+		}
+	}
+	return res
+}
+
+func (es *Events) GetNextEvent() *Event {
+	res := new(Event)
+	for _, e := range es.Events {
+		if e.IsNext == true {
+			return &e
+		}
+	}
+	return res
+}

@@ -26,10 +26,11 @@ import (
 // }
 
 func NewPlayers(players []Player) (*Players, error) {
-	ts := map[int]Player{}
+	ts := []Player{}
 	tid := map[int]Player{}
 	for _, player := range players {
-		ts[player.Code] = player
+		ts = append(ts, player)
+		//ts[player.Code] = player
 		tid[player.ID] = player
 	}
 

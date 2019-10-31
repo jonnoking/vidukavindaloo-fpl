@@ -22,11 +22,14 @@ type FPL struct {
 }
 
 type Bootstrap struct {
-	Players     *models.Players
-	Teams       *models.Teams
-	PlayerTypes *models.PlayerTypes
-	Events      *models.Events
-	Phases      *models.Phases
+	Players      *models.Players
+	Teams        *models.Teams
+	PlayerTypes  *models.PlayerTypes
+	Events       *models.Events
+	Phases       *models.Phases
+	CurrentWeek  *models.Event
+	PreviousWeek *models.Event
+	NextWeek     *models.Event
 }
 
 func New(config *config.FPLConfig) *FPL {
@@ -59,11 +62,14 @@ func (f *FPL) LoadBoostrapLive() {
 	teams, _ = models.NewTeamsFromBootStrapMap(bs)
 
 	f.Bootstrap = &Bootstrap{
-		Events:      events,
-		Phases:      phases,
-		PlayerTypes: playerTypes,
-		Players:     players,
-		Teams:       teams,
+		Events:       events,
+		Phases:       phases,
+		PlayerTypes:  playerTypes,
+		Players:      players,
+		Teams:        teams,
+		CurrentWeek:  events.GetCurrentEvent(),
+		PreviousWeek: events.GetPreviousEvent(),
+		NextWeek:     events.GetNextEvent(),
 	}
 }
 
@@ -77,20 +83,21 @@ func (f *FPL) LoadBootstrapCache() {
 	teams, _ = models.NewTeamsFromBootStrapByteArray(b)
 
 	f.Bootstrap = &Bootstrap{
-		Events:      events,
-		Phases:      phases,
-		PlayerTypes: playerTypes,
-		Players:     players,
-		Teams:       teams,
+		Events:       events,
+		Phases:       phases,
+		PlayerTypes:  playerTypes,
+		Players:      players,
+		Teams:        teams,
+		CurrentWeek:  events.GetCurrentEvent(),
+		PreviousWeek: events.GetPreviousEvent(),
+		NextWeek:     events.GetNextEvent(),
 	}
 }
 
 func init() {
-	//LoadFromLive()
 }
 
 func main() {
-
 	// cookies, err := RefreshCookies()
 	// if err != nil {
 	// 	log.Println(err)

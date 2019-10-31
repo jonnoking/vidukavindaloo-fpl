@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"sort"
 	s "strings"
 )
 
@@ -138,4 +139,41 @@ func (t *Team) GetSquad(players *Players) (goalkeepers, defenders, midfielders, 
 	return
 }
 
+func (t *Team) GetTeamPoints(players *Players) (totalPoints int) {
+	totalPoints = 0
+
+	for _, player := range players.Players {
+		if player.TeamCode == t.Code {
+			totalPoints += player.TotalPoints
+		}
+	}
+	t.Points = totalPoints
+
+	return
+}
+
 //https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_8-220.png
+
+func (ts *Teams) SortByHomeStrength() {
+	sort.Slice(ts.Teams[:], func(i, j int) bool {
+		return ts.Teams[i].StrengthOverallHome > ts.Teams[j].StrengthOverallHome
+	})
+}
+
+func (ts *Teams) SortByAwayStrength() {
+	sort.Slice(ts.Teams[:], func(i, j int) bool {
+		return ts.Teams[i].StrengthOverallAway > ts.Teams[j].StrengthOverallAway
+	})
+}
+
+func (ts *Teams) SortByStrength() {
+	sort.Slice(ts.Teams[:], func(i, j int) bool {
+		return ts.Teams[i].Strength > ts.Teams[j].Strength
+	})
+}
+
+func (ts *Teams) SortByTotalPoints(players *Players) {
+	sort.Slice(ts.Teams[:], func(i, j int) bool {
+		return ts.Teams[i].GetTeamPoints(players) > ts.Teams[j].GetTeamPoints(players)
+	})
+}

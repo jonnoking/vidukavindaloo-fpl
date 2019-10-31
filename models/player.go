@@ -2,12 +2,22 @@ package models
 
 import (
 	"fmt"
+	"sort"
 	s "strings"
 )
 
+/*
+Status
+a = available
+i = injured
+d = some chance of playing
+n = on loan
+u = "transferred"
+*/
+
 // Players represents all players in the FPL via bootstrap
 type Players struct {
-	Players     map[int]Player `json:"players"`
+	Players     []Player       `json:"players"`
 	PlayersByID map[int]Player `json:"players"`
 }
 
@@ -114,3 +124,23 @@ func (p *Player) GetPlayerType(types *PlayerTypes) *PlayerType {
 	t := types.Positions[p.PlayerTypeID]
 	return &t
 }
+
+func (ps *Players) SortByTotalPoints() {
+	sort.Slice(ps.Players[:], func(i, j int) bool {
+		return ps.Players[i].TotalPoints > ps.Players[j].TotalPoints
+	})
+
+	// sort.Sort(SortedPlayers(ps.Players))
+	// //SortedPlayers(ps.Players).Swap(0, 1)
+	// fmt.Printf("Len: %d \n", SortedPlayers(ps.Players).Len())
+	// fmt.Printf("Sorted: %s \n", ps.Players[0].GetFullName())
+}
+
+/*
+Custom type that implements sort.Interface
+*/
+// type SortedPlayers []Player
+
+// func (a SortedPlayers) Len() int           { return len(a) }
+// func (a SortedPlayers) Less(i, j int) bool { return a[i].TotalPoints > a[j].TotalPoints }
+// func (a SortedPlayers) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
