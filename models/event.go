@@ -17,7 +17,7 @@ type Event struct {
 	DeadlineTimeEpoch      int              `json:"deadline_time_epoch"`
 	DeadlineTimeGameOffset int              `json:"deadline_time_epoch_offset"`
 	HighestScore           int              `json:"highest_score"`
-	IsPrevious             bool             `json:"in_previous"`
+	IsPrevious             bool             `json:"is_previous"`
 	IsCurrent              bool             `json:"is_current"`
 	IsNext                 bool             `json:"is_next"`
 	ChipPlays              []EventChipPlays `json:"chip_plays"`

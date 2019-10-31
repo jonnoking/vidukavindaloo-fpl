@@ -75,7 +75,11 @@ func (f *FPL) LoadBoostrapLive() {
 
 func (f *FPL) LoadBootstrapCache() {
 
-	b, _ := f.API.LoadBootsrapFromCache()
+	b, e := f.API.LoadBootsrapFromCache()
+	if e != nil {
+		f.LoadBoostrapLive()
+		return
+	}
 	events, _ = models.NewEventsFromBootStrapByteArray(b)
 	phases, _ = models.NewPhasesFromByteArray(b)
 	playerTypes, _ = models.NewPlayerTypesFromByteArray(b)
