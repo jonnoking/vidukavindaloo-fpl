@@ -43,7 +43,7 @@ func (p *FPLAPI) GetMyTeamAPI(entryID int) string {
 	return str.Replace(p.MyTeam, ENTRY_ID, strc.Itoa(entryID), 1)
 }
 
-func (p *FPLAPI) GetElementAPI(elementID int) string {
+func (p *FPLAPI) GetElementSummaryAPI(elementID int) string {
 	return str.Replace(p.Element, ELEMENT_ID, strc.Itoa(elementID), 1)
 }
 

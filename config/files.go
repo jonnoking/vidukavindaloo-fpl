@@ -50,6 +50,10 @@ func (f *FPLFile) GetClassicLeagueFilename(leagueID int) string {
 	return fmt.Sprintf("%s/%d-my-league-classic.json", f.Folder, leagueID)
 }
 
+func (f *FPLFile) GetElementSummaryFilename(elementID int) string {
+	return fmt.Sprintf("%s/%d-elementsummary.json", f.Folder, elementID)
+}
+
 func (f *FPLFile) GetTeamLargeShirtFilename(teamID int, teamName string) string {
 	team := strings.ReplaceAll(teamName, " ", "-")
 	return fmt.Sprintf("%s/%d-shirt-large-%s-220.png", f.Shirt, teamID, team)

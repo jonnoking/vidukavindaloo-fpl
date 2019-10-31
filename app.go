@@ -46,7 +46,7 @@ func New(config *config.FPLConfig) *FPL {
 	}
 }
 
-func (f *FPL) LoadBoostrapLive() {
+func (f *FPL) LoadBoostrapLive() error {
 
 	// var players *models.Players
 	// var teams *models.Teams
@@ -71,22 +71,40 @@ func (f *FPL) LoadBoostrapLive() {
 		PreviousWeek: events.GetPreviousEvent(),
 		NextWeek:     events.GetNextEvent(),
 	}
+
+	return nil
 }
 
-func (f *FPL) LoadBootstrapCache() {
+func (f *FPL) LoadBootstrapCache() error {
 
 	b, e := f.API.LoadBootsrapFromCache()
 	if e != nil {
-		f.LoadBoostrapLive()
-		return
+		// calling app should determine if bootstrap should be called live
+		return e
 	}
+
+	f.Bootstrap = mapBootstrap(b)
+	return nil
+}
+
+func (f *FPL) LoadBootstrapFromFile(filename string) error {
+	b, e := f.API.LoadBoostrapFromFile(filename)
+	if e != nil {
+		return e
+	}
+
+	f.Bootstrap = mapBootstrap(b)
+	return nil
+}
+
+func mapBootstrap(b []byte) *Bootstrap {
 	events, _ = models.NewEventsFromBootStrapByteArray(b)
 	phases, _ = models.NewPhasesFromByteArray(b)
 	playerTypes, _ = models.NewPlayerTypesFromByteArray(b)
 	players, _ = models.NewPlayersFromBootStrapByteArray(b)
 	teams, _ = models.NewTeamsFromBootStrapByteArray(b)
 
-	f.Bootstrap = &Bootstrap{
+	return &Bootstrap{
 		Events:       events,
 		Phases:       phases,
 		PlayerTypes:  playerTypes,

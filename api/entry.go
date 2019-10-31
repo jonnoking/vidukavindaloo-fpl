@@ -50,7 +50,7 @@ func (api *API) GetEntry(entryID int) (*models.Entry, error) {
 
 	byteValue, readErr := api.ExecuteFPLGet(api.Config.API.GetEntryAPI(entryID))
 	if readErr != nil {
-		log.Fatal(readErr)
+		return nil, readErr
 	}
 
 	entry = models.Entry{}
@@ -159,7 +159,7 @@ func (api *API) CreateTransferMap(transfers *models.EntryTransfers) (*models.Ent
 	etm := models.EntryTransfersMap{}
 	etm.Transfers = map[string]*models.Transfer{}
 
-	log.Printf("Transfers Length: %d\n", len(transfers.Transfers))
+	//log.Printf("Transfers Length: %d\n", len(transfers.Transfers))
 
 	for _, t := range transfers.Transfers {
 		etm.Transfers[fmt.Sprintf("event-%d", t.Event)] = &t

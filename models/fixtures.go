@@ -1,6 +1,8 @@
 package models
 
-// Fixture Not sure it's necessary yet
-type Fixture struct {
-	ID int
+import ()
+
+//https://fantasy.premierleague.com/api/fixtures/
+type Fixutres struct {
+
 }

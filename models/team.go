@@ -139,7 +139,7 @@ func (t *Team) GetSquad(players *Players) (goalkeepers, defenders, midfielders, 
 	return
 }
 
-func (t *Team) GetTeamPoints(players *Players) (totalPoints int) {
+func (t *Team) GetTotalPoints(players *Players) (totalPoints int) {
 	totalPoints = 0
 
 	for _, player := range players.Players {
@@ -174,6 +174,6 @@ func (ts *Teams) SortByStrength() {
 
 func (ts *Teams) SortByTotalPoints(players *Players) {
 	sort.Slice(ts.Teams[:], func(i, j int) bool {
-		return ts.Teams[i].GetTeamPoints(players) > ts.Teams[j].GetTeamPoints(players)
+		return ts.Teams[i].GetTotalPoints(players) > ts.Teams[j].GetTotalPoints(players)
 	})
 }
