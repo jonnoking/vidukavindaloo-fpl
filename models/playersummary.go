@@ -60,7 +60,7 @@ type PlayerFixtureHistory struct {
 
 // history_past[]
 type PlayerHistory struct {
-	Season          string `json:"season"`
+	SeasonName      string `json:"season_name"`
 	ElementCode     int    `json:"element_code"`
 	StartCost       int    `json:"start_cost"`
 	EndCost         int    `json:"end_cost"`
