@@ -1,8 +1,5 @@
 package models
 
-import ()
-
-//https://fantasy.premierleague.com/api/fixtures/
+//https://fantasy.premierleague.com/api/fixtures/?event=12
 type Fixutres struct {
-
 }
